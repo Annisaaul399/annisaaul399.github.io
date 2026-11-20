@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Annisa Aulia – Portofolio Lengkap</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header id="top">
+  <nav class="wrap" aria-label="Navigasi utama">
+    <a class="brand" href="#beranda">Annisa</a>
+    <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
+    <ul class="links" id="links">
+      <li><a href="#tentang">About</a></li>
+      <li><a href="#pengalaman">Experience</a></li>
+      <li><a href="#proyek">Projects</a></li>
+      <li><a href="#keahlian">Skills</a></li>
+      <li><a href="#pendidikan">Education</a></li>
+      <li><a href="#kontak">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="beranda">
+    <div class="wrap">
+      <div>
+        
+        <h1 class="load" style="--d:.15s">Annisa <em>Aulia</em></h1>
+        <h3 class="role load"> <b>Web Developer · Data Management · IT Support</b></h3>
+        <p class="lead load" style="--d:.3s">Bachelor of Informatics graduate from Universitas Ahmad Dahlan. Passionate about
+          <b>data management</b>, <b>information management</b>,  <b>and IT support</b>.
+        </p>
+        <div class="btns load" style="--d:.45s">
+          <a class="btn pri" href="#kontak">Contact Me</a>
+          <a href="assets/files/CV_Annisa_Aulia.pdf" class="btn sec" target="_blank" rel="noopener noreferrer" download>
+  Download CV
+            <img src="assets/images/download.png" alt="Download Icon" class="icon" />
+          </a>
+
+        <div class="icon-btn-group">
+          <a href="https://github.com/Annisaaul399" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-btn">
+            <img src="assets/images/github.png" alt="GitHub" class="icon" />
+          </a>
+          <a href="https://linkedin.com/in/annisa-aulia-219a92277" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="icon-btn">
+            <img src="assets/images/linkedin.png" alt="LinkedIn" class="icon" />
+          </a>
+          <a href="https://instagram.com/aanisa.aul" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="icon-btn">
+            <img src="assets/images/instagram.png" alt="Instagram" class="icon" />
+          </a>
+        </div> 
+        </div>
+      </div>
+      <aside class="card-photo-only" aria-label="Foto profil Annisa Aulia">
+        <img src="assets/images/foto-annisa.jpg" alt="Foto Annisa Aulia" class="photo" />
+      </aside>
+    </div>
+  </section>
+
+  <section class="alt" id="tentang">
+    <div class="wrap">
+      <h2 class="rv">About Me</h2>
+
+      <div class="about-grid">
+        <div class="about-main">
+          <div class="about-card rv">
+            <p>I am an <strong>Informatics graduate from Ahmad Dahlan University in Yogyakarta</strong> with skills in <strong> database management, and information systems</strong>. I am familiar with using <strong>Microsoft Excel, SQL, and MySQL</strong> for data entry, processing, validation, and management.</p>
+            <p>Outside of class, I serve as a laboratory assistant for Algorithm Programming and am active in the Taekwondo Student Activities Unit. I am meticulous, adaptable to new systems, and comfortable working in a team. Currently, I am interested in data management, information management, and IT support.</p>
+          </div>
+
+          <figure class="campus rv" style="--d:.1s">
+            <img src="assets/images/kampus4.png" alt="Universitas Ahmad Dahlan campus" onerror="this.remove()">
+            <span class="cchip l">Main Campus (Campus IV)</span>
+            <span class="cchip r">Yogyakarta, ID</span>
+            <figcaption class="cap">
+              <div><h3>Universitas Ahmad Dahlan</h3></div>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="stats rv" style="--d:.15s">
+          <div class="stat"><b>80+</b><span>Students mentored as a laboratory assistant</span></div>
+          <div class="stat"><b>2</b><span>Web-based systems built and deployed</span></div>
+          <div class="stat"><b>3,48</b><span>GPA from a scale of 4,00</span></div>
+          <div class="stat"><b>11</b><span>Technologies and tools mastered</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ganti seluruh <section id="pengalaman"> lama dengan ini -->
+  <section id="pengalaman" class="pf">
+    <div class="wrap">
+      <h2 class="rv">Portfolio</h2>
+      <!--<p class="pf-intro rv">Project yang pernah saya bangun dan pengalaman kerja yang saya jalani.</p>-->
+
+      <div class="pf-bar rv">
+        <div class="pf-filters" role="group" aria-label="Filter portofolio">
+          <button class="pf-filter is-active" data-filter="all" aria-pressed="true">All</button>
+          <button class="pf-filter" data-filter="kerja" aria-pressed="false">Work Experience</button>
+          <button class="pf-filter" data-filter="project" aria-pressed="false">Project</button> 
+          <button class="pf-filter" data-filter="organisasi" aria-pressed="false">Organization</button> 
+          <button class="pf-filter" data-filter="assistant" aria-pressed="false">Lab Assistant</button> 
+        </div>
+        <div class="pf-nav">
+          <button class="pf-arrow" id="pfPrev" aria-label="Geser ke kiri">&#8592;</button>
+          <button class="pf-arrow" id="pfNext" aria-label="Geser ke kanan">&#8594;</button>
+        </div>
+      </div>
+
+      <div class="pf-track" id="pfTrack" tabindex="0" aria-label="Daftar project dan pengalaman kerja">
+
+        <!-- ===== CARD PROJECT ===== -->
+        <article class="pf-card" data-type="project">
+          <div class="pf-img">
+            <img src="assets/images/mpti1.png" alt="Tampilan aplikasi project 2" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            <span class="pf-badge">Project</span>
+          </div>
+          <div class="pf-body">
+            <h3>Development of Management System for Metal Casting Company</h3>
+            <p class="pf-meta">CV Kembar Jaya </p>
+            <p class="pf-desc">Developed an integrated company website and admin dashboard with centralized database management, customer order processing, order status tracking, and dynamic content management.</p>
+            <div class="pf-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span><span>MySQL</span></div>
+            <a class="pf-link" href="https://github.com/Annisaaul399/nama-repo-2" target="_blank" rel="noopener noreferrer">See Detail</a>
+          </div>
+        </article>
+
+        <!-- ===== CARD PENGALAMAN KERJA ===== -->
+        <article class="pf-card" data-type="kerja">
+          <div class="pf-img">
+            <img src="assets/images/apotik2.png" alt="Tampilan sistem informasi akademik" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            <span class="pf-badge">Internship</span>
+          </div>
+          <div class="pf-body">
+            <h3>Development and Planning of the Information System for Langse Farma Pharmacy, Boyolali</h3>
+            <p class="pf-meta">
+              <span>Apotek Langse Farma, Boyolali</span>
+              <a class="pf-site" href="https://langsefarma.com" target="_blank" rel="noopener noreferrer" aria-label="Buka website Apotek Langse Farma" title="Buka website">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/>
+                </svg>
+              </a>
+            </p>
+            <p class="pf-desc">Developed a web-based pharmacy information system featuring stock management, sales transactions, and transaction history to improve operational efficiency and data accuracy.</p>
+            <div class="pf-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span><span>Laravel</span></div>
+            <a class="pf-link" href="https://github.com/Annisaaul399/Pengembang-Sistem-Informasi-Apotik-Langse-Farma-Boyolali" target="_blank" rel="noopener noreferrer">See Detail</a>
+          </div>
+        </article>
+                 
+        <!-- ===== CARD Laboratorium Assistant ===== -->
+        <article class="pf-card" data-type="assistant">
+          <div class="pf-img">
+            <img src="assets/images/asprak1.png" alt="Tampilan sistem informasi akademik" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            <span class="pf-badge">Lab Assistant</span>
+          </div>
+          <div class="pf-body">
+            <h3>Algorithm Programming Laboratory Assistant</h3>
+            <p class="pf-meta">Faculty of Industrial Technology</p>
+            <p class="pf-desc">Assisted Algorithm Programming courses by teaching fundamental programming concepts, guiding students through debugging, and managing academic records for over 80 students.</p>
+            <div class="pf-tags"><span>C++</span><span>GitHub</span><span>Java</span></div>
+            <a class="pf-link" href="https://drive.google.com/file/d/1_6h5VXPUnGxtmleaCJR_Y8pm0hpbpZWK/view?usp=drive_link" target="_blank" rel="noopener noreferrer">See Detail</a>
+          </div>
+        </article>
+
+        <!-- ===== CARD Organisasit ===== -->
+        <article class="pf-card" data-type="organisasi">
+          <div class="pf-img">
+            <img src="assets/images/pengurus.png" alt="Tampilan sistem informasi akademik" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            <span class="pf-badge">Organization</span>
+          </div>
+          <div class="pf-body">
+            <h3>Division Head - Belt Promotion Test and Championship</h3>
+            <p class="pf-meta">UKM Taekwondo UAD</p>
+            <p class="pf-desc">Managed administrative operations for Taekwondo belt promotion tests and championships, including event documentation, athlete data management, funding coordination, and report preparation.</p>
+            <!-- <div class="pf-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div> -->
+            <a class="pf-link" href="https://drive.google.com/file/d/19M4ywEOExyonS9YQsnzU5smlc5LFU3ei/view?usp=sharing" target="_blank" rel="noopener noreferrer">See Detail</a>
+          </div>
+        </article>
+
+        <article class="pf-card" data-type="organisasi">
+          <div class="pf-img">
+            <img src="assets/images/pengurus.png" alt="Tampilan sistem informasi akademik" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            <span class="pf-badge">Organization</span>
+          </div>
+          <div class="pf-body">
+            <h3>Presiding Officer – Taekwondo Student Organization Congress Committee</h3>
+            <p class="pf-meta">UKM Taekwondo UAD</p>
+            <p class="pf-desc">Led organizational congress plenary sessions, coordinated discussions, facilitated participant input, and ensured structured decision-making to achieve collective agreements.</p>
+            <!-- <div class="pf-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div> -->
+            <a class="pf-link" href="https://drive.google.com/file/d/19M4ywEOExyonS9YQsnzU5smlc5LFU3ei/view?usp=sharing" target="_blank" rel="noopener noreferrer">See Detail</a>
+          </div>
+        </article>        
+
+      </div>
+
+      <p class="pf-empty" id="pfEmpty" hidden>Belum ada item untuk kategori ini.</p>
+    </div>
+  </section>
+
+  <!-- <section class="alt" id="proyek">
+    <div class="wrap">
+      <h2 class="rv">Projects</h2>
+
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <div class="wrap">
+      <h2 class="rv">Skills</h2>
+
+    </div>
+  </section>
+
+  <section class="alt" id="pendidikan">
+    <div class="wrap">
+      <h2 class="rv">Education</h2>
+
+    </div>
+  </section> -->
+
+  
+<!-- Ganti seluruh <section class="contact" id="kontak"> yang lama dengan ini -->
+<section class="contact" id="kontak">
+  <div class="wrap">
+    <div class="contact-card rv">
+      <h2>Interested in Collaborating?</h2>
+      <p>Open to entry-level opportunities in Data Management,<br>
+         Information Management, and IT Support.</p>
+
+      <div class="contact-links">
+        <a href="mailto:aanisaa399@gmail.com">Email</a>
+        <a href="https://wa.me/628114709095" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://linkedin.com/in/annisa-aulia-219a92277" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <!-- <a href="https://instagram.com/aanisa.aul" target="_blank" rel="noopener noreferrer">Instagram</a> -->
+        <a href="https://github.com/Annisaaul399" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 Annisa Aulia · Yogyakarta, Indonesia</div></footer>
+
+<script src="script.js"></script>
+</body>
+</html>
