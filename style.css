@@ -621,42 +621,11 @@ footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted);font-s
 }
 
 
+/* =====================================================
+   THEME PATCH - tempel di PALING BAWAH style.css
+   (setelah blok "Indikator scroll modern")
+   ===================================================== */
 
-/* ---------- Indikator scroll modern (pengganti scrollbar bawaan) ---------- */
-.pf-track { scrollbar-width: none; -ms-overflow-style: none; padding-bottom: .75rem; }
-.pf-track::-webkit-scrollbar { display: none; }
-
-.pf-progress { display: flex; align-items: center; gap: 1.1rem; margin-top: .35rem; }
-.pf-progress[hidden] { display: none; }
-
-.pf-rail {
-  position: relative; flex: 1; height: 24px;   /* area sentuh yang nyaman */
-  cursor: pointer; touch-action: none;
-}
-.pf-rail::before {                              /* garis rel tipis */
-  content: ""; position: absolute; left: 0; right: 0; top: 50%;
-  height: 2px; transform: translateY(-50%); border-radius: 2px;
-  background: var(--pf-line);
-}
-.pf-thumb {                                     /* pil yang bergerak */
-  position: absolute; top: 50%; left: 0; height: 6px; min-width: 40px;
-  transform: translateY(-50%); border-radius: 999px;
-  background: linear-gradient(90deg, var(--pf-accent), color-mix(in srgb, var(--pf-accent) 55%, #fff));
-  box-shadow: 0 0 14px color-mix(in srgb, var(--pf-accent) 45%, transparent);
-  transition: width .35s ease, height .2s ease;
-}
-.pf-rail:hover .pf-thumb,
-.pf-track.is-dragging ~ .pf-progress .pf-thumb { height: 10px; }
-
-.pf-count {
-  font-size: .85rem; letter-spacing: .08em; color: var(--pf-muted);
-  font-variant-numeric: tabular-nums; white-space: nowrap;
-}
-.pf-count b { color: var(--pf-ink); font-weight: 600; font-size: 1rem; }
-
-@media (prefers-reduced-motion: reduce) {
-  .pf-thumb { transition: none; }
-}
 
 /* ---------- 1. Tombol hero: teks & ikon rata tengah, tinggi sama ---------- */
 .btns { align-items: center; }
