@@ -264,3 +264,150 @@
 
   updateArrows();
 })();
+
+(function () {
+  const root = document.querySelector('[data-slider]');
+  if (!root) return;
+
+  const track  = root.querySelector('.award-track');
+  const slides = [...root.querySelectorAll('.award-slide')];
+  const dotsEl = root.querySelector('.award-dots');
+  const view   = root.querySelector('.award-viewport');
+  let i = 0, timer;
+
+  // buat titik indikator
+  const dots = slides.map((_, n) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'award-dot';
+    b.setAttribute('aria-label', 'Slide ' + (n + 1));
+    b.addEventListener('click', () => { go(n); restart(); });
+    dotsEl.appendChild(b);
+    return b;
+  });
+
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    track.style.transform = 'translateX(' + (-i * 100) + '%)';
+    slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+  }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(() => go(i + 1), 5000);
+  }
+
+  root.querySelector('.prev').addEventListener('click', () => { go(i - 1); restart(); });
+  root.querySelector('.next').addEventListener('click', () => { go(i + 1); restart(); });
+
+  // berhenti saat di-hover
+  root.addEventListener('mouseenter', () => clearInterval(timer));
+  root.addEventListener('mouseleave', restart);
+
+  // swipe di layar sentuh
+  let startX = null;
+  view.addEventListener('pointerdown', e => { startX = e.clientX; });
+  view.addEventListener('pointerup', e => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 40) { go(i + (dx < 0 ? 1 : -1)); restart(); }
+    startX = null;
+  });
+  view.addEventListener('pointercancel', () => { startX = null; });
+
+  go(0);
+  restart();
+})();
+
+/* ACHIEVEMENTS - tempel di PALING BAWAH script.js */
+(function () {
+  const rows = document.querySelectorAll('.ach-row');
+  if (!rows.length) return;
+
+  /* ---------- Lightbox bersama (klik foto untuk memperbesar) ---------- */
+  let box = null;
+  function openBox(src, alt, title) {
+    if (!box) {
+      box = document.createElement('dialog');
+      box.className = 'pf-lightbox';          // memakai gaya lightbox yang sudah ada
+      box.setAttribute('aria-label', 'Image preview');
+      box.innerHTML =
+        '<button class="pf-lightbox-close" aria-label="Close">&#10005;</button>' +
+        '<figure><img alt=""><figcaption></figcaption></figure>';
+      document.body.appendChild(box);
+      box.querySelector('.pf-lightbox-close').addEventListener('click', function () { box.close(); });
+      box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+    }
+    const img = box.querySelector('img');
+    img.src = src;
+    img.alt = alt;
+    box.querySelector('figcaption').textContent = title;
+    box.showModal();
+  }
+
+  rows.forEach(function (row) {
+    const track = row.querySelector('.ach-track');
+    const prev = row.querySelector('.ach-prev');
+    const next = row.querySelector('.ach-next');
+    const dotsBox = row.querySelector('.ach-dots');
+    let pages = 1;
+
+    const gap = function () { return parseFloat(getComputedStyle(track).columnGap) || 16; };
+    const pageW = function () { return track.clientWidth + gap(); };   // 1 halaman = 1 layar penuh
+    const maxLeft = function () { return track.scrollWidth - track.clientWidth; };
+
+    function current() {
+      if (track.scrollLeft >= maxLeft() - 2) return pages - 1;
+      return Math.min(pages - 1, Math.round(track.scrollLeft / pageW()));
+    }
+
+    function goTo(i) {
+      track.scrollTo({ left: Math.max(0, i) * pageW(), behavior: 'smooth' });
+    }
+
+    function update() {
+      const c = current();
+      Array.prototype.forEach.call(dotsBox.children, function (d, i) {
+        d.classList.toggle('is-on', i === c);
+        d.setAttribute('aria-current', i === c ? 'true' : 'false');
+      });
+      prev.disabled = c <= 0;
+      next.disabled = c >= pages - 1;
+    }
+
+    function build() {
+      pages = Math.max(1, Math.ceil((track.scrollWidth + gap()) / pageW() - 0.01));
+      dotsBox.innerHTML = '';
+      for (let i = 0; i < pages; i++) {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'ach-dot';
+        d.setAttribute('aria-label', 'Go to page ' + (i + 1));
+        d.addEventListener('click', function () { goTo(i); });
+        dotsBox.appendChild(d);
+      }
+      row.classList.toggle('is-single', pages <= 1);
+      update();
+    }
+
+    prev.addEventListener('click', function () { goTo(current() - 1); });
+    next.addEventListener('click', function () { goTo(current() + 1); });
+    track.addEventListener('scroll', update, { passive: true });
+
+    let t;
+    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 150); });
+
+    /* klik foto -> perbesar */
+    row.addEventListener('click', function (e) {
+      const btn = e.target.closest('.ach-photo');
+      if (!btn) return;
+      const img = btn.querySelector('img');
+      if (!img) return;                       // gambar belum ada
+      const cap = btn.closest('.ach-item').querySelector('figcaption b');
+      openBox(img.currentSrc || img.src, img.alt, cap ? cap.textContent : '');
+    });
+
+    build();
+  });
+})();

@@ -17,10 +17,9 @@
     <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
     <ul class="links" id="links">
       <li><a href="#tentang">About</a></li>
-      <li><a href="#pengalaman">Experience</a></li>
-      <li><a href="#proyek">Projects</a></li>
       <li><a href="#keahlian">Skills</a></li>
-      <li><a href="#pendidikan">Education</a></li>
+      <li><a href="#pengalaman">Experience</a></li>   
+      <li><a href="#pencapaian">Achievements</a></li>
       <li><a href="#kontak">Contact</a></li>
     </ul>
   </nav>
@@ -62,36 +61,83 @@
     </div>
   </section>
 
-  <section class="alt" id="tentang">
-    <div class="wrap">
-      <h2 class="rv">About Me</h2>
+<section class="alt" id="tentang">
+  <div class="wrap">
+    <h2 class="rv">About Me</h2>
 
-      <div class="about-grid">
-        <div class="about-main">
-          <div class="about-card rv">
-            <p>I am an <strong>Informatics graduate from Ahmad Dahlan University in Yogyakarta</strong> with skills in <strong> database management, and information systems</strong>. I am familiar with using <strong>Microsoft Excel, SQL, and MySQL</strong> for data entry, processing, validation, and management.</p>
-            <p>Outside of class, I serve as a laboratory assistant for Algorithm Programming and am active in the Taekwondo Student Activities Unit. I am meticulous, adaptable to new systems, and comfortable working in a team. Currently, I am interested in data management, information management, and IT support.</p>
+    <div class="about-grid">
+
+      <!-- Kiri atas: deskripsi -->
+      <div class="about-card rv">
+        <p>I am an <strong>Informatics graduate from Ahmad Dahlan University in Yogyakarta</strong> with skills in <strong>database management, and information systems</strong>. I am familiar with using <strong>Microsoft Excel, SQL, and MySQL</strong> for data entry, processing, validation, and management.</p>
+        <p>Outside of class, I serve as a laboratory assistant for Algorithm Programming and am active in the Taekwondo Student Activities Unit. I am meticulous, adaptable to new systems, and comfortable working in a team. Currently, I am interested in data management, information management, and IT support.</p>
+      </div>
+
+      <!-- Kanan atas: sertifikat wisudawan berprestasi -->
+      <!-- Kanan atas: slider sertifikat -->
+      <div class="award rv" style="--d:.05s" data-slider>
+        <div class="award-viewport">
+          <div class="award-track">
+
+            <figure class="award-slide">
+              <img src="assets/images/awards.png" alt="Certificate of Outstanding Graduate" onerror="this.remove()">
+              <figcaption>
+                <span class="award-tag">Award</span>
+                <h3>Outstanding Graduate</h3>
+                <p>Universitas Ahmad Dahlan</p>
+              </figcaption>
+            </figure>
+
+            <figure class="award-slide">
+              <img src="assets/images/lulus-tepat.png" alt="Certificate of On-Time Graduation" onerror="this.remove()">
+              <figcaption>
+                <span class="award-tag">Certificate</span>
+                <h3>On-Time Graduation</h3>
+                <p>Universitas Ahmad Dahlan</p>
+              </figcaption>
+            </figure>
+
           </div>
 
-          <figure class="campus rv" style="--d:.1s">
-            <img src="assets/images/kampus4.png" alt="Universitas Ahmad Dahlan campus" onerror="this.remove()">
-            <span class="cchip l">Main Campus (Campus IV)</span>
-            <span class="cchip r">Yogyakarta, ID</span>
-            <figcaption class="cap">
-              <div><h3>Universitas Ahmad Dahlan</h3></div>
-            </figcaption>
-          </figure>
+          <button class="award-nav prev" type="button" aria-label="Sebelumnya">&#8249;</button>
+          <button class="award-nav next" type="button" aria-label="Berikutnya">&#8250;</button>
         </div>
 
-        <div class="stats rv" style="--d:.15s">
-          <div class="stat"><b>80+</b><span>Students mentored as a laboratory assistant</span></div>
-          <div class="stat"><b>2</b><span>Web-based systems built and deployed</span></div>
-          <div class="stat"><b>3,48</b><span>GPA from a scale of 4,00</span></div>
-          <div class="stat"><b>11</b><span>Technologies and tools mastered</span></div>
-        </div>
+        <div class="award-dots" role="tablist"></div>
       </div>
+
+      <!-- Kiri bawah: kampus -->
+      <figure class="campus rv" style="--d:.1s">
+        <img src="assets/images/kampus4.png" alt="Universitas Ahmad Dahlan campus" onerror="this.remove()">
+        <span class="cchip l">Main Campus (Campus IV)</span>
+        <span class="cchip r">Yogyakarta, ID</span>
+        <figcaption class="cap">
+          <div><h3>Universitas Ahmad Dahlan</h3></div>
+        </figcaption>
+      </figure>
+
+      <!-- Kanan bawah: 4 stat dalam 1 grid -->
+      <div class="stats rv" style="--d:.15s">
+        <div class="stat"><b>80+</b><span>Students mentored as a laboratory assistant</span></div>
+        <div class="stat"><b>2</b><span>Web-based systems built and deployed</span></div>
+        <div class="stat"><b>3,48</b><span>GPA from a scale of 4,00</span></div>
+        <div class="stat"><b>11</b><span>Technologies and tools mastered</span></div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Lightbox sertifikat -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Pratinjau sertifikat">
+  <button class="lb-btn lb-close" type="button" aria-label="Tutup">&times;</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Sebelumnya">&#8249;</button>
+  <button class="lb-btn lb-next" type="button" aria-label="Berikutnya">&#8250;</button>
+  <figure class="lb-fig">
+    <img class="lb-img" src="" alt="">
+    <figcaption class="lb-cap"></figcaption>
+  </figure>
+</div>
 
 
   <section id="keahlian">
@@ -185,7 +231,7 @@
           </div>
           <div class="pf-body">
             <h3>Division Head - Belt Promotion Test and Championship</h3>
-            <p class="pf-meta">UKM Taekwondo UAD</p>
+            <p class="pf-meta">UKM Taekwondo UAD 2023-2025</p>
             <p class="pf-desc">Managed administrative operations for Taekwondo belt promotion tests and championships, including event documentation, athlete data management, funding coordination, and report preparation.</p>
             <!-- <div class="pf-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div> -->
             <a class="pf-link" href="https://drive.google.com/file/d/19M4ywEOExyonS9YQsnzU5smlc5LFU3ei/view?usp=sharing" target="_blank" rel="noopener noreferrer">See Detail</a>
@@ -199,7 +245,7 @@
           </div>
           <div class="pf-body">
             <h3>Presiding Officer – Taekwondo Student Organization Congress Committee</h3>
-            <p class="pf-meta">UKM Taekwondo UAD</p>
+            <p class="pf-meta">UKM Taekwondo UAD 2024</p>
             <p class="pf-desc">Led organizational congress plenary sessions, coordinated discussions, facilitated participant input, and ensured structured decision-making to achieve collective agreements.</p>
             <!-- <div class="pf-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div> -->
             <a class="pf-link" href="https://drive.google.com/file/d/19M4ywEOExyonS9YQsnzU5smlc5LFU3ei/view?usp=sharing" target="_blank" rel="noopener noreferrer">See Detail</a>
@@ -213,14 +259,126 @@
   </section>
 
 
-  <!-- <section class="alt" id="proyek">
+ <section class="alt" id="pencapaian">
     <div class="wrap">
-      <h2 class="rv">Projects</h2>
+      <h2 class="rv">Achievements</h2>
 
+      <!-- ===== BARIS 1: BEASISWA ===== -->
+      <div class="ach-row rv">
+        <div class="ach-head">
+          <div class="ach-title">
+            <span class="ach-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div>
+              <h3>Scholarships</h3>
+              <p class="ach-sub">Scholarship achievements</p>
+            </div>
+          </div>
+          <div class="ach-nav">
+            <button class="ach-arrow ach-prev" type="button" aria-label="Previous">&#8592;</button>
+            <button class="ach-arrow ach-next" type="button" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+
+        <div class="ach-track" tabindex="0" aria-label="Scholarship gallery">
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/lazismu.png" alt="Scholarship certificate 1" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b><a href="https://www.instagram.com/p/C9QvkGMzvl7/?utm_source=ig_web_copy_link&dmpr=MzRlODBiNWFlZA==&avpt=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">Scholarship Sang Surya KL Lazismu UAD </a></b><span>🏅Scholarship awarded based on achievements</span></figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/bpa.png" alt="Scholarship certificate 2" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b><a href="https://bimawa.uad.ac.id/hasil-seleksi-bpa-uad-2023/" target="_blank" rel="noopener noreferrer">UAD Academic Achievement Scholarship</a></b><span>🗓️Semester 2, Academic Year 2022/2023</span></figcaption>
+          </figure>
+
+        </div>
+
+        <div class="ach-dots"></div>
+      </div>
+
+      <!-- ===== BARIS 2: LOMBA NON-AKADEMIK ===== -->
+      <div class="ach-row rv">
+        <div class="ach-head">
+          <div class="ach-title">
+            <span class="ach-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            </span>
+            <div>
+              <h3>Competitions</h3>
+              <p class="ach-sub">Non-academic competition certificates</p>
+            </div>
+          </div>
+          <div class="ach-nav">
+            <button class="ach-arrow ach-prev" type="button" aria-label="Previous">&#8592;</button>
+            <button class="ach-arrow ach-next" type="button" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+        <div class="ach-track" tabindex="0" aria-label="Competition gallery">
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/dpr.png" alt="Competition certificate 6" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Indonesia Expo Battle Taekwondo Championship 2025 - DPR RI Cup</b><span></span>🥇 Gold Medal</figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/prabu.png" alt="Competition certificate 6" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Prabu Taekwondo Challenge VIII Championship 2025</b><span></span>🥇 Gold Medal</figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/bali.png" alt="Competition certificate 6" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Bali Open Tournament Ngurah Harta Cup III Taekwondo Championship 2024</b><span></span>🥈 Silver Medal</figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/walkot.png" alt="Competition certificate 6" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Mayor of Yogyakarta Cup XI Taekwondo Championship 2024</b><span></span>🥇 Gold Medal</figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/ugmtc.png" alt="Competition certificate 5" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>UGM Taekwondo Championship 2024</b><span>🥇 Gold Medal</span></figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/ganesha.png" alt="Competition certificate 4" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Ganesha Taekwondo Competition National Open 2024</b><span>🥇 Gold Medal</span></figcaption>
+          </figure>                                        
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/danrem.png" alt="Competition certificate 1" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>National Taekwondo Championship Danrem 052/WKR 2023</b><span>🥇 Gold Medal</span></figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/everest.png" alt="Competition certificate 2" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Everest Taekwondo Championship II - Kemenpora RI Cup 2023</b><span>🥇 Gold Medal</span></figcaption>
+          </figure>
+          <figure class="ach-item">
+            <button class="ach-photo" type="button" aria-label="Enlarge image">
+              <img src="assets/images/presisi.png" alt="Competition certificate 3" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove()">
+            </button>
+            <figcaption><b>Bhayangkara Presisi 2023 - DIY Police Chief's Challenge Trophy</b><span>🥉 Bronze Medal</span></figcaption>
+          </figure>        
+        </div>
+        <div class="ach-dots"></div>
+      </div>
     </div>
   </section>
 
-  <section class="alt" id="pendidikan">
+   <!--  <section class="alt" id="pendidikan">
     <div class="wrap">
       <h2 class="rv">Education</h2>
 
@@ -251,5 +409,8 @@
 <footer><div class="wrap">© 2026 Annisa Aulia · Yogyakarta, Indonesia</div></footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>
+
+
