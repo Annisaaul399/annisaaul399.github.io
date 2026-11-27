@@ -1,62 +1,148 @@
+/* =====================================================
+   STYLE.CSS — Annisa Aulia Portfolio
+   Urutan: tokens → base → nav → hero → about → portfolio
+           → experience/projects → skills → education
+           → achievements → contact → lightbox → responsive
+   ===================================================== */
+
+
+/* ---------- 1. Design tokens ---------- */
 :root{
   color-scheme:light;
-  --cream:#FAF5EB; --beige:#EFE4D0; --sand:#D9C5A6; --brown:#6B4A30; --espresso:#2E2018;
-  --bg:var(--cream); --surface:#FFFBF3; --alt:var(--beige); --line:#E2D3BA;
-  --text:#2E2018; --muted:#6F5E4F; --accent:#6B4A30; --accent-ink:#FAF5EB;
+
+  /* palet dasar */
+  --cream:#FAF5EB;
+  --beige:#EFE4D0;
+  --sand:#D9C5A6;
+  --brown:#6B4A30;
+  --espresso:#2E2018;
+  --night:#1E1611;               /* overlay gelap (lightbox, chip, gradasi foto) */
+
+  /* aksen emas (slider sertifikat) */
+  --gold:#B8863B;
+  --gold-deep:#D4A24C;
+  --gold-soft:#E3C58F;
+  --gold-light:#F6E7BF;
+
+  /* warna semantik */
+  --bg:var(--cream);             /* satu-satunya warna latar halaman */
+  --surface:#FFFBF3;             /* kartu */
+  --alt:var(--beige);            /* isi chip, ikon, placeholder */
+  --line:#E2D3BA;
+  --text:var(--espresso);
+  --muted:#6F5E4F;
+  --accent:var(--brown);
+  --accent-soft:#85603F;         /* label & ikon sekunder */
+  --accent-ink:var(--cream);
+
+  /* font: 1 serif untuk judul, 1 sans untuk semua teks lain */
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+
+  /* skala ukuran teks kecil */
+  --fs-xs:.8rem;
+  --fs-sm:.875rem;
+  --fs-md:.95rem;
+  --fs-lg:1.05rem;
+
+  /* bayangan */
+  --shadow-lift:0 24px 40px -28px var(--espresso);
+  --shadow-deep:0 30px 50px -32px color-mix(in srgb,var(--espresso) 70%,transparent);
+  --shadow-card:0 1px 4px color-mix(in srgb,var(--espresso) 12%,transparent);
+
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
 
+
+/* ---------- 2. Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));height:auto}
 body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}
+button,input,textarea,select{font:inherit}
+strong,b{font-weight:600}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
 .wrap{width:min(1080px,100% - 2.5rem);margin-inline:auto}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;margin:0;letter-spacing:-.01em}
 h2{font-size:clamp(2rem,4vw,2.75rem);margin-bottom:2.5rem}
 h3{font-size:1.35rem}
 p{margin:0}
 section{padding:6rem 0}
-.alt{background:var(--alt)}
+.alt{background:var(--bg)}      /* semua section tetap satu warna krem */
 
-/* nav */
+
+/* ---------- 3. Navigasi ---------- */
 header{position:fixed;inset:0 0 auto 0;z-index:20;padding-top:env(safe-area-inset-top,0px);
-  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;transition:border-color .3s}
 header.scrolled{border-color:var(--line)}
 nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .brand{font-family:var(--serif);font-size:1.4rem;text-decoration:none}
 .links{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
-.links a{text-decoration:none;font-size:.95rem;color:var(--muted);position:relative;padding:.3rem 0;transition:color .25s}
+.links a{text-decoration:none;font-size:var(--fs-md);color:var(--muted);position:relative;padding:.3rem 0;transition:color .25s}
 .links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .links a:hover,.links a.on{color:var(--text)}
 .links a:hover::after,.links a.on::after{transform:scaleX(1)}
-.menu{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .8rem;font:inherit;cursor:pointer}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .8rem;cursor:pointer}
 
-/* hero */
+
+/* ---------- 4. Hero ---------- */
 .hero{min-height:100svh;display:flex;align-items:center;padding:8rem 0 5rem}
 .hero .wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:center}
 .role{color:var(--muted);margin-bottom:1.25rem}
 .hero h1{font-size:clamp(3.4rem,9vw,7rem);line-height:.98;margin-bottom:1.75rem}
 .hero h1 em{font-style:italic;color:var(--accent)}
-.lead{max-width:34rem;color:var(--muted);font-size:1.08rem;margin-bottom:2.25rem}
-.btns{display:flex;gap:.9rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.85rem 1.6rem;border-radius:999px;text-decoration:none;font-weight:500;font-size:.95rem;border:1px solid var(--accent);transition:transform .25s,background .25s,color .25s,box-shadow .25s}
+.lead{max-width:34rem;color:var(--muted);font-size:var(--fs-lg);margin-bottom:2.25rem}
+
+.btns{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:54px;padding:.85rem 1.6rem;
+  border:1px solid var(--accent);border-radius:999px;
+  font-size:var(--fs-md);font-weight:500;line-height:1.2;
+  text-decoration:none;cursor:pointer;
+  transition:transform .25s,background .25s,color .25s,box-shadow .25s;
+}
 .btn.pri{background:var(--accent);color:var(--accent-ink)}
-.btn.sec{color:var(--text);border-color:var(--sand)}
+.btn.sec{background:var(--surface);color:var(--text);border-color:var(--sand)}
+.btn.sec img.icon{width:18px;height:18px;display:block}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px -10px var(--espresso)}
-.btn.sec:hover{background:var(--surface)}
+.btn.sec:hover{background:var(--alt)}
+
+.icon-btn-group{display:flex;gap:1rem;align-items:center;justify-content:flex-start;min-height:54px}
+.icon-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;padding:8px;border-radius:50%;
+  border:1px solid var(--sand);background:var(--surface);
+  box-shadow:var(--shadow-card);text-decoration:none;cursor:pointer;
+  transition:background-color .25s ease;
+}
+.icon-btn:hover{background:var(--alt)}
+.icon{width:20px;height:20px;display:block}
+
 .card-id{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2rem;display:grid;gap:1.4rem}
 .mono{width:88px;height:88px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:400 2.2rem var(--serif)}
 .facts{display:grid;gap:1rem;margin:0}
 .facts div{border-top:1px solid var(--line);padding-top:.9rem}
-.facts dt{font-size:.85rem;color:var(--muted)}
+.facts dt{font-size:var(--fs-sm);color:var(--muted)}
 .facts dd{margin:0;font-family:var(--serif);font-size:1.2rem}
 
+.card-photo-only{
+  max-width:280px;margin:auto;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  box-shadow:0 4px 10px color-mix(in srgb,var(--espresso) 8%,transparent);
+}
+.card-photo-only:hover .photo{
+  transform:scale(1.05);cursor:pointer;
+  box-shadow:0 8px 20px color-mix(in srgb,var(--espresso) 20%,transparent);
+}
+.photo{display:block;width:100%;height:auto;object-fit:cover;border-radius:12px;transition:transform .3s ease}
 
-/* about */
-/* ===== About: 4 layout ===== */
+
+/* ---------- 5. About: 4 kotak ---------- */
 .about-grid{
   display:grid;
   grid-template-columns:1.5fr 1fr;
@@ -71,1072 +157,54 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .campus{grid-area:campus}
 .stats{grid-area:stats}
 
-/* Kiri atas: deskripsi */
+/* kiri atas: deskripsi */
 .about-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:2rem}
 .about-top{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1.4rem}
 .about-top .tags{margin-top:0}
-.about-top small{color:var(--muted);font-size:.85rem}
-.about-card p{color:var(--muted);font-size:1.05rem}
+.about-top small{color:var(--muted);font-size:var(--fs-sm)}
+.about-card p{color:var(--muted);font-size:var(--fs-lg)}
 .about-card p+p{margin-top:1.1rem}
-.about-card strong{color:var(--accent);font-weight:600}
+.about-card strong{color:var(--accent)}
 
-/* Kanan atas: sertifikat */
-/* Kanan atas: slider sertifikat */
+/* kanan atas: slider sertifikat */
 .award{
-  grid-area:award;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  gap:.6rem;
-  padding:1rem;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:22px;
-  min-width:0;
-}
-.award-viewport{
-  position:relative;
-  flex:1;
-  display:flex;
-  min-height:260px;
-  overflow:hidden;
-  border-radius:14px;
-  touch-action:pan-y;
-}
-.award-track{
-  flex:1;
-  min-width:0;
-  display:flex;
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
-}
-.award-slide{
-  flex:0 0 100%;
-  margin:0;
-  display:flex;
-  flex-direction:column;
-  gap:.7rem;
-  min-width:0;
-}
-.award-slide img{
-  flex:1;
-  min-height:0;
-  width:100%;
-  object-fit:contain;
-  border-radius:12px;
-  background:var(--beige);
-  user-select:none;
-  -webkit-user-drag:none;
-}
-.award-slide figcaption{
-  text-align:center;
-  padding:0 .5rem .2rem;
-  opacity:.35;
-  transform:translateY(4px);
-  transition:opacity .5s, transform .5s;
-}
-.award-slide.is-active figcaption{opacity:1;transform:none}
-.award-tag{
-  display:inline-block;
-  font-size:.7rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:.25rem;
-}
-.award-slide h3{font-size:1.2rem;color:var(--text)}
-.award-slide p{margin:.15rem 0 0;font-size:.85rem;color:var(--muted)}
-
-/* Tombol panah */
-.award-nav{
-  position:absolute;
-  top:38%;
-  transform:translateY(-50%);
-  z-index:2;
-  width:34px;height:34px;
-  border-radius:50%;
-  border:1px solid var(--sand);
-  background:rgba(255,251,243,.92);
-  color:var(--accent);
-  font-size:1.4rem;
-  line-height:1;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  box-shadow:0 2px 8px rgba(46,32,24,.15);
-  transition:background .2s, transform .2s;
-}
-.award-nav:hover{background:var(--beige)}
-.award-nav:active{transform:translateY(-50%) scale(.94)}
-.award-nav.prev{left:8px}
-.award-nav.next{right:8px}
-
-/* Titik indikator */
-.award-dots{display:flex;justify-content:center;gap:.5rem}
-.award-dot{
-  width:8px;height:8px;
-  padding:0;
-  border-radius:999px;
-  border:0;
-  background:var(--sand);
-  cursor:pointer;
-  transition:width .3s, background .3s;
-}
-.award-dot.is-active{width:22px;background:var(--accent)}
-.award:hover img{transform:scale(1.02)}
-
-/* Kiri bawah: kampus */
-.campus{position:relative;margin:0;min-height:340px;height:100%;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#6B4A30,#2E2018);box-shadow:0 30px 50px -32px rgba(46,32,24,.7)}
-.campus img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
-.campus:hover img{transform:scale(1.04)}
-.campus::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,22,17,.25),transparent 35%,rgba(30,22,17,.9))}
-.cchip{position:absolute;z-index:1;top:14px;padding:.4rem .9rem;border-radius:999px;background:rgba(30,22,17,.8);color:#FAF5EB;font-size:.8rem;font-weight:500}
-.cchip.l{left:14px}.cchip.r{right:14px}
-.cap{position:absolute;z-index:1;left:20px;right:20px;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;color:#FAF5EB}
-.cap small{display:block;color:#E3C58F;font-size:.8rem;margin-bottom:.2rem}
-.cap h3{font-size:1.5rem;color:#FAF5EB}
-.cap .deg{padding:.45rem .9rem;border-radius:10px;border:1px solid rgba(217,197,166,.5);background:rgba(107,74,48,.55);font-size:.85rem}
-
-/* Kanan bawah: 4 stat dalam 1 grid 2x2, tiap kotak tetap terpisah */
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-auto-rows:1fr;
-  gap:1rem;
-}
-.stat{
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:1rem .8rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  box-shadow:0 1px 4px rgba(75,55,38,.12);
-}
-.stat b{
-  display:block;
-  font-size:1.9rem;
-  font-weight:600;
-  color:#7b4a1b;
-  margin-bottom:.4rem;
-}
-.stat span{font-size:.8rem;line-height:1.4;color:#4b3726}
-
-/* Mobile: tumpuk 1 kolom */
-@media (max-width:760px){
-  .about-grid{
-    grid-template-columns:1fr;
-    grid-template-areas:
-      "desc"
-      "award"
-      "campus"
-      "stats";
-  }
-  .campus{min-height:260px}
-}
-
-.icon-btn-group {
-  display: flex;
-  gap: 1rem; /* jarak antar tombol */
-  background-color: var(--cream);
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  justify-content: flex-start; /* atur posisi ikon kiri atau tengah */
-  align-items: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  border-radius: 20px;
-  border: 1px solid var(--sand);
-  background: var(--cream);
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  text-decoration: none;
-}
-
-.icon-btn:hover {
-  background-color: var(--beige);
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
-.btn.sec {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0.85rem 1.6rem;
-  border-radius: 999px;
-  border: 1px solid #D9C5A6; /* contoh warna pasir */
-  background: #FFFBF3; /* warna krem */
-  color: #2E2018;
-  font-weight: 500;
-  font-size: 0.95rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.25s ease;
-}
-
-.btn.sec:hover {
-  background: #EFE4D0; /* warna lebih terang pada hover */
-}
-
-.btn.sec img.icon {
-  width: 18px;
-  height: 18px;
-  display: block;
-}
-
-.card-photo-only {
-  max-width: 280px;
-  margin: auto;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.card-photo-only:hover .photo {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  cursor: pointer;
-}
-
-.photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 12px; /* membulatkan sudut foto supaya rapi */
-  transition: transform 0.3s ease;
-}
-
-/* Ikon website di baris meta */
-.pf-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
-
-.pf-site {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 50%;
-  color: var(--pf-accent); border: 1px solid var(--pf-line);
-  transition: background .2s, color .2s, border-color .2s;
-}
-.pf-site:hover { background: var(--pf-accent); color: var(--pf-accent-ink); border-color: var(--pf-accent); }
-.pf-site:focus-visible { outline: 2px solid var(--pf-accent); outline-offset: 2px; }
-
-/* Tambahkan di bagian bawah style.css.
-   Warna mengikuti variabel milikmu jika ada (--ink, --muted, --line, --card, --accent);
-   kalau tidak ada, dipakai nilai cadangan di sebelah kanan. */
-
-.pf {
-  --pf-ink: var(--ink, #1f2430);
-  --pf-muted: var(--muted, #667085);
-  --pf-line: var(--line, #e3e5ea);
-  --pf-card: var(--card, #ffffff);
-  --pf-accent: var(--accent, #2f5d50);
-  --pf-accent-ink: #ffffff;
-}
-
-.pf-intro { color: var(--pf-muted); margin: .4rem 0 1.5rem; max-width: 56ch; }
-
-/* Filter + tombol panah */
-.pf-bar {
-  display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem;
-}
-.pf-filters { display: flex; flex-wrap: wrap; gap: .5rem; }
-.pf-filter {
-  font: inherit; font-weight: 500; font-size: .95rem;
-  padding: .5rem 1rem; border-radius: 999px; cursor: pointer;
-  background: transparent; color: var(--pf-ink);
-  border: 1px solid var(--pf-line);
-  transition: background .2s, color .2s, border-color .2s;
-}
-.pf-filter:hover { border-color: var(--pf-accent); }
-.pf-filter.is-active {
-  background: var(--pf-accent); color: var(--pf-accent-ink);
-  border-color: var(--pf-accent);
-}
-
-.pf-nav { display: flex; gap: .5rem; }
-.pf-arrow {
-  width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
-  font-size: 1.1rem; line-height: 1;
-  background: var(--pf-card); color: var(--pf-ink);
-  border: 1px solid var(--pf-line);
-  transition: background .2s, color .2s, opacity .2s;
-}
-.pf-arrow:hover:not(:disabled) { background: var(--pf-ink); color: var(--pf-card); }
-.pf-arrow:disabled { opacity: .35; cursor: default; }
-
-.pf-filter:focus-visible, .pf-arrow:focus-visible,
-.pf-link:focus-visible, .pf-track:focus-visible {
-  outline: 2px solid var(--pf-accent); outline-offset: 3px;
-}
-
-/* Track yang bisa digeser */
-.pf-track {
-  display: flex; gap: 1.25rem;
-  overflow-x: auto; overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory; scroll-behavior: smooth;
-  padding: .25rem .25rem 1.25rem; margin: 0 -.25rem;
-  scrollbar-width: thin;
-  cursor: grab;
-}
-.pf-track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
-.pf-track.is-dragging a { pointer-events: none; }
-
-/* Card */
-.pf-card {
-  flex: 0 0 min(340px, 84%);
-  scroll-snap-align: start;
-  display: flex; flex-direction: column;
-  background: var(--pf-card);
-  border: 1px solid var(--pf-line); border-radius: 14px;
-  overflow: hidden;
-}
-.pf-card[hidden] { display: none; }
-
-.pf-img { position: relative; aspect-ratio: 16 / 10; background: #e9ecef; overflow: hidden; }
-.pf-img img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
-.pf-img.no-img { background: repeating-linear-gradient(135deg, #eceef1 0 12px, #e4e7eb 12px 24px); }
-.pf-badge {
-  position: absolute; left: .75rem; top: .75rem;
-  font-size: .78rem; font-weight: 600;
-  padding: .25rem .65rem; border-radius: 999px;
-  background: var(--pf-card); color: var(--pf-ink);
-}
-
-.pf-body { display: flex; flex-direction: column; gap: .5rem; padding: 1.1rem 1.2rem 1.3rem; flex: 1; }
-.pf-body h3 { margin: 0; font-size: 1.15rem; line-height: 1.3; color: var(--pf-ink); }
-.pf-meta { margin: 0; font-size: .85rem; color: var(--pf-muted); }
-.pf-desc { margin: .25rem 0 0; font-size: .95rem; line-height: 1.6; color: var(--pf-ink); }
-
-.pf-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .25rem; }
-.pf-tags span {
-  font-size: .78rem; padding: .2rem .55rem; border-radius: 6px;
-  border: 1px solid var(--pf-line); color: var(--pf-muted);
-}
-
-.pf-link {
-  margin-top: auto; align-self: flex-start;
-  font-weight: 600; font-size: .92rem; text-decoration: none;
-  color: var(--pf-accent); padding-top: .75rem;
-  border-bottom: 2px solid transparent;
-}
-.pf-link:hover { border-bottom-color: currentColor; }
-
-.pf-empty { color: var(--pf-muted); padding: 1rem 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  .pf-track { scroll-behavior: auto; }
-}
-@media (max-width: 600px) {
-  .pf-nav { display: none; } /* di HP cukup geser dengan jari */
-}
-
-
-/* timeline (experience is chronological) */
-.tl{position:relative;display:grid;gap:2.5rem;padding-left:2rem;border-left:1px solid var(--sand)}
-.item{position:relative}
-.item::before{content:"";position:absolute;left:calc(-2rem - 5px);top:.6rem;width:9px;height:9px;border-radius:50%;background:var(--accent)}
-.when{font-size:.9rem;color:var(--muted)}
-.item h3{margin:.2rem 0 .2rem}
-.org{color:var(--accent);margin-bottom:.9rem;font-weight:500}
-ul.b{margin:0;padding-left:1.1rem;color:var(--muted)}
-ul.b li{margin-bottom:.35rem;padding-left:.2rem}
-.item ul.b{max-width:46rem}
-
-/* projects */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.proj{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:2rem;transition:transform .35s,box-shadow .35s,border-color .35s}
-.proj:hover{transform:translateY(-6px);border-color:var(--sand);box-shadow:0 24px 40px -28px var(--espresso)}
-.proj.wide{grid-column:1/-1}
-.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
-.tag{font-size:.82rem;padding:.25rem .8rem;border-radius:999px;background:var(--alt);border:1px solid var(--line);color:var(--muted)}
-
-/* Tambahkan di bagian bawah style.css.
-   Warna mengikuti variabel milikmu jika ada (--ink, --muted, --line, --card, --accent);
-   kalau tidak ada, dipakai nilai cadangan di sebelah kanan. */
-
-.pf {
-  --pf-ink: var(--ink, #1f2430);
-  --pf-muted: var(--muted, #667085);
-  --pf-line: var(--line, #e3e5ea);
-  --pf-card: var(--card, #ffffff);
-  --pf-accent: var(--accent, #2f5d50);
-  --pf-accent-ink: #ffffff;
-}
-
-.pf-intro { color: var(--pf-muted); margin: .4rem 0 1.5rem; max-width: 56ch; }
-
-/* Filter + tombol panah */
-.pf-bar {
-  display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem;
-}
-.pf-filters { display: flex; flex-wrap: wrap; gap: .5rem; }
-.pf-filter {
-  font: inherit; font-weight: 500; font-size: .95rem;
-  padding: .5rem 1rem; border-radius: 999px; cursor: pointer;
-  background: transparent; color: var(--pf-ink);
-  border: 1px solid var(--pf-line);
-  transition: background .2s, color .2s, border-color .2s;
-}
-.pf-filter:hover { border-color: var(--pf-accent); }
-.pf-filter.is-active {
-  background: var(--pf-accent); color: var(--pf-accent-ink);
-  border-color: var(--pf-accent);
-}
-
-.pf-nav { display: flex; gap: .5rem; }
-.pf-arrow {
-  width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
-  font-size: 1.1rem; line-height: 1;
-  background: var(--pf-card); color: var(--pf-ink);
-  border: 1px solid var(--pf-line);
-  transition: background .2s, color .2s, opacity .2s;
-}
-.pf-arrow:hover:not(:disabled) { background: var(--pf-ink); color: var(--pf-card); }
-.pf-arrow:disabled { opacity: .35; cursor: default; }
-
-.pf-filter:focus-visible, .pf-arrow:focus-visible,
-.pf-link:focus-visible, .pf-track:focus-visible {
-  outline: 2px solid var(--pf-accent); outline-offset: 3px;
-}
-
-/* Track yang bisa digeser */
-.pf-track {
-  display: flex; gap: 1.25rem;
-  overflow-x: auto; overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory; scroll-behavior: smooth;
-  padding: .25rem .25rem 1.25rem; margin: 0 -.25rem;
-  scrollbar-width: thin;
-  cursor: grab;
-}
-.pf-track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
-.pf-track.is-dragging a { pointer-events: none; }
-
-/* Card */
-.pf-card {
-  flex: 0 0 min(340px, 84%);
-  scroll-snap-align: start;
-  display: flex; flex-direction: column;
-  background: var(--pf-card);
-  border: 1px solid var(--pf-line); border-radius: 14px;
-  overflow: hidden;
-}
-.pf-card[hidden] { display: none; }
-
-.pf-img { position: relative; aspect-ratio: 16 / 10; background: #e9ecef; overflow: hidden; }
-.pf-img img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
-.pf-img.no-img { background: repeating-linear-gradient(135deg, #eceef1 0 12px, #e4e7eb 12px 24px); }
-.pf-badge {
-  position: absolute; left: .75rem; top: .75rem;
-  font-size: .78rem; font-weight: 600;
-  padding: .25rem .65rem; border-radius: 999px;
-  background: var(--pf-card); color: var(--pf-ink);
-}
-
-.pf-body { display: flex; flex-direction: column; gap: .5rem; padding: 1.1rem 1.2rem 1.3rem; flex: 1; }
-.pf-body h3 { margin: 0; font-size: 1.15rem; line-height: 1.3; color: var(--pf-ink); }
-.pf-meta { margin: 0; font-size: .85rem; color: var(--pf-muted); }
-.pf-desc { margin: .25rem 0 0; font-size: .95rem; line-height: 1.6; color: var(--pf-ink); }
-
-.pf-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .25rem; }
-.pf-tags span {
-  font-size: .78rem; padding: .2rem .55rem; border-radius: 6px;
-  border: 1px solid var(--pf-line); color: var(--pf-muted);
-}
-
-.pf-link {
-  margin-top: auto; align-self: flex-start;
-  font-weight: 600; font-size: .92rem; text-decoration: none;
-  color: var(--pf-accent); padding-top: .75rem;
-  border-bottom: 2px solid transparent;
-}
-.pf-link:hover { border-bottom-color: currentColor; }
-
-.pf-empty { color: var(--pf-muted); padding: 1rem 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  .pf-track { scroll-behavior: auto; }
-}
-@media (max-width: 600px) {
-  .pf-nav { display: none; } /* di HP cukup geser dengan jari */
-}
-
-/* ---------- Hover gradasi + perbesar gambar ---------- */
-.pf-img { cursor: zoom-in; }
-.pf-img.no-img { cursor: default; }
-.pf-img img { transition: transform .5s ease; }
-
-/* gradasi gelap dari bawah ke atas */
-.pf-img::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.25) 35%, transparent 65%);
-  opacity: 0; transition: opacity .3s ease;
-}
-.pf-img:not(.no-img):hover::after,
-.pf-img:not(.no-img):focus-visible::after { opacity: 1; }
-.pf-img:not(.no-img):hover img { transform: scale(1.04); }
-
-/* petunjuk "Perbesar" di bawah gambar */
-.pf-img:not(.no-img)::before {
-  position: absolute; left: .9rem; bottom: .8rem; z-index: 1;
-  font-size: .82rem; font-weight: 500; color: #fff;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity .3s ease, transform .3s ease; pointer-events: none;
-}
-.pf-img:not(.no-img):hover::before,
-.pf-img:not(.no-img):focus-visible::before { opacity: 1; transform: none; }
-.pf-badge { z-index: 2; }
-.pf-img:focus-visible { outline: 2px solid var(--pf-accent); outline-offset: -2px; }
-
-/* ---------- Lightbox ---------- */
-.pf-lightbox {
-  border: 0; padding: 0; background: transparent;
-  max-width: 94vw; max-height: 92vh; overflow: visible;
-}
-.pf-lightbox::backdrop { background: rgba(10, 12, 16, .85); }
-.pf-lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: .75rem; }
-.pf-lightbox img {
-  max-width: 94vw; max-height: 80vh; object-fit: contain;
-  border-radius: 10px; background: #111;
-}
-.pf-lightbox figcaption { color: #fff; font-size: .95rem; text-align: center; max-width: 70ch; }
-.pf-lightbox-close {
-  position: absolute; top: -2.75rem; right: 0;
-  width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
-  font-size: 1.2rem; line-height: 1;
-  background: #fff; color: #1f2430; border: 0;
-}
-.pf-lightbox-close:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.pf-lightbox[open] img { animation: pfZoom .25s ease; }
-@keyframes pfZoom { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .pf-img img, .pf-img::after, .pf-img::before { transition: none; }
-  .pf-img:hover img { transform: none; }
-  .pf-lightbox[open] img { animation: none; }
-}
-
-/* skills */
-.skills{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.skills h3{margin-bottom:1.2rem}
-
-/* education + org */
-.edu{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.gpa{font:400 3rem/1 var(--serif);color:var(--accent);margin:1rem 0 .3rem}
-
-/* contact */
-.contact{text-align:center}
-.contact h2{margin-bottom:1rem}
-.contact p{color:var(--muted);max-width:32rem;margin:0 auto 2.2rem}
-.contact .btns{justify-content:center}
-footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;text-align:center}
-
-/* Tambahkan di bagian bawah style.css */
-
-.contact-card {
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: clamp(2.5rem, 6vw, 4.25rem) clamp(1.25rem, 4vw, 2.5rem);
-  border-radius: 22px;
-  text-align: center;
-  color: #fff;
-  /* Ganti dua warna ini dengan warna tema kamu */
-  --c-from: var(--accent, #2f5d50);
-  --c-to: color-mix(in srgb, var(--c-from) 55%, #000);
-  background: linear-gradient(135deg, var(--c-from) 0%, var(--c-to) 100%);
-}
-
-.contact-card h2 {
-  margin: 0 0 1rem;
-  color: #fff;
-  /* font, ukuran, dan berat huruf mengikuti gaya h2 di style.css kamu */
-}
-
-.contact-card p,
-.contact-links a {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-}
-
-.contact-card p {
-  margin: 0 auto 2.25rem;
-  max-width: 52ch;
-  font-size: clamp(1rem, 2vw, 1.1rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, .82);
-}
-
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .9rem 1rem;
-}
-
-.contact-links a {
-  padding: .8rem 1.5rem;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1rem;
-  text-decoration: none;
-  color: #fff;
-  background: rgba(255, 255, 255, .13);
-  border: 1px solid rgba(255, 255, 255, .28);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: background .2s, transform .2s, border-color .2s;
-}
-
-.contact-links a:hover {
-  background: rgba(255, 255, 255, .24);
-  border-color: rgba(255, 255, 255, .5);
-  transform: translateY(-2px);
-}
-
-.contact-links a:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .contact-links a { transition: none; }
-  .contact-links a:hover { transform: none; }
-}
-
-@media (max-width: 480px) {
-  .contact-links a { flex: 1 1 40%; }
-}
-
-/* reveal */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease;transition-delay:var(--d,0s)}
-.rv.in{opacity:1;transform:none}
-.load{animation:fade 1s ease both;animation-delay:var(--d,0s)}
-@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv,.load{opacity:1;transform:none;animation:none;transition:none}}
-
-@media (max-width:860px){
-  section{padding:4.5rem 0}
-  .hero .wrap,.about,.grid2,.skills,.edu{grid-template-columns:1fr}
-  .hero .wrap{gap:2.5rem}
-  .menu{display:block}
-  .links{position:absolute;top:calc(68px + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .35s}
-  .links.open{max-height:340px}
-  .links a{display:block;padding:.9rem 1.25rem}
-  .links a::after{display:none}
-  .campus{min-height:300px}
-  .about-grid{grid-template-columns:1fr}
-  .stats{display:grid;grid-template-columns:1fr 1fr}
-}
-
-
-/* =====================================================
-   THEME PATCH - tempel di PALING BAWAH style.css
-   (setelah blok "Indikator scroll modern")
-   ===================================================== */
-
-
-/* ---------- 1. Tombol hero: teks & ikon rata tengah, tinggi sama ---------- */
-.btns { align-items: center; }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  line-height: 1.2;
-  min-height: 54px;
-}
-
-/* ikuti tema (termasuk dark mode), bukan warna tetap */
-.btn.sec { background: var(--surface); color: var(--text); border-color: var(--sand); }
-.btn.sec:hover { background: var(--alt); }
-
-/* ikon sosial: hapus kotak di belakangnya, sisakan bulatan saja */
-.icon-btn-group {
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  min-height: 54px;   /* tinggi sejajar dengan tombol */
-}
-
-
-/* ---------- 2. Portfolio: pakai palet krem-cokelat milikmu ---------- */
-.pf {
-  --pf-ink: var(--text);
-  --pf-muted: var(--muted);
-  --pf-line: var(--line);
-  --pf-card: var(--surface);
-  --pf-accent: var(--accent);
-  --pf-accent-ink: var(--accent-ink);
-}
-
-.pf-img { background: var(--alt); }
-.pf-img.no-img {
-  background: repeating-linear-gradient(135deg, var(--alt) 0 12px, var(--line) 12px 24px);
-}
-
-.pf-card { transition: border-color .3s; }
-.pf-card:hover { border-color: var(--sand); }
-
-.pf-tags span { background: var(--alt); }
-
-
-/* ---------- 3. Kartu kontak: gradasi cokelat -> espresso (sama seperti foto kampus) ---------- */
-.contact-card {
-  max-width: none;
-  border-radius: 22px;
-  color: #FAF5EB;
-  background: linear-gradient(160deg, var(--brown) 0%, var(--espresso) 100%);
-  border: 1px solid color-mix(in srgb, var(--sand) 35%, transparent);
-  box-shadow: 0 30px 50px -32px rgba(46, 32, 24, .7);
-}
-
-.contact-card h2 { color: #FAF5EB; }
-.contact-card h2 em { font-style: italic; color: #E3C58F; }  /* sama seperti em di judul hero */
-
-.contact-card p {
-  font-family: var(--sans);
-  color: rgba(250, 245, 235, .8);
-}
-
-/* tombol berbentuk pil, sama seperti .btn di hero */
-.contact-links a {
-  font-family: var(--sans);
-  font-size: .95rem;
-  padding: .85rem 1.6rem;
-  border-radius: 999px;
-  color: #FAF5EB;
-  background: rgba(250, 245, 235, .08);
-  border: 1px solid rgba(217, 197, 166, .45);
-}
-.contact-links a:hover {
-  background: #FAF5EB;
-  color: var(--espresso);
-  border-color: #FAF5EB;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -10px #000;
-}
-
-.sk-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  align-items: stretch;
-}
-
-.sk-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 2rem;
-  /* opacity & transform tetap ada supaya animasi muncul (.rv) tidak hilang */
-  transition: opacity .8s ease, transform .5s ease, box-shadow .35s, border-color .35s;
-}
-.sk-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--sand);
-  box-shadow: 0 24px 40px -28px var(--espresso);
-}
-
-/* judul kotak */
-.sk-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
-.sk-head h3 { margin: 0; }
-.sk-sub { margin: 0; font-size: .9rem; color: var(--muted); }
-
-.sk-badge {
-  flex: none;
-  width: 54px; height: 54px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--accent); color: var(--accent-ink);
-}
-.sk-badge svg { width: 26px; height: 26px; }
-
-/* daftar skill */
-.sk-list { list-style: none; margin: 0; padding: 0; }
-.sk-list li {
-  display: flex; gap: 1rem; align-items: flex-start;
-  padding: 1rem 0;
-  border-top: 1px solid var(--line);
-}
-
-.sk-ico {
-  flex: none;
-  width: 42px; height: 42px; border-radius: 12px;
-  display: grid; place-items: center;
-  background: var(--alt); color: var(--accent);
-  transition: background .25s, color .25s;
-}
-.sk-ico svg { width: 20px; height: 20px; }
-.sk-list li:hover .sk-ico { background: var(--accent); color: var(--accent-ink); }
-
-.sk-name { display: block; font-weight: 600; line-height: 1.3; }
-.sk-note { margin: .2rem 0 0; font-size: .92rem; color: var(--muted); line-height: 1.55; }
-.sk-card .tags { margin-top: .55rem; gap: .4rem; }
-.sk-card .tag { background: var(--alt); }
-
-@media (max-width: 860px) {
-  .sk-grid { grid-template-columns: 1fr; }
-  .sk-card { padding: 1.5rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sk-card, .sk-ico { transition: none; }
-  .sk-card:hover { transform: none; }
-}
-
-
-/* =====================================================
-   ACHIEVEMENTS - galeri 2 baris (beasiswa & lomba)
-   ===================================================== */
-
-.ach-row + .ach-row { margin-top: 3.25rem; }
-
-.ach-head {
-  display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem;
-}
-.ach-title { display: flex; align-items: center; gap: .9rem; }
-.ach-title h3 { margin: 0; }
-.ach-sub { margin: 0; font-size: .9rem; color: var(--muted); }
-
-.ach-icon {
-  flex: none; width: 48px; height: 48px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--accent); color: var(--accent-ink);
-}
-.ach-icon svg { width: 24px; height: 24px; }
-
-/* tombol panah */
-.ach-nav { display: flex; gap: .5rem; }
-.ach-arrow {
-  width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
-  font-size: 1.1rem; line-height: 1;
-  background: var(--surface); color: var(--text);
-  border: 1px solid var(--line);
-  transition: background .2s, color .2s, opacity .2s;
-}
-.ach-arrow:hover:not(:disabled) { background: var(--accent); color: var(--accent-ink); }
-.ach-arrow:disabled { opacity: .35; cursor: default; }
-
-/* track: 4 foto per slide */
-.ach-track {
-  --per: 4;
-  --gap: 1rem;
-  display: flex; gap: var(--gap);
-  overflow-x: auto; overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory; scroll-behavior: smooth;
-  scrollbar-width: none; -ms-overflow-style: none;
-  padding: .25rem 0 .5rem;
-}
-.ach-track::-webkit-scrollbar { display: none; }
-
-.ach-item {
-  flex: 0 0 calc((100% - var(--gap) * (var(--per) - 1)) / var(--per));
-  scroll-snap-align: start;
-  margin: 0;
-}
-
-.ach-photo {
-  position: relative; display: block; width: 100%;
-  aspect-ratio: 4 / 3; padding: 0; overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line); border-radius: 14px;
-  cursor: zoom-in;
-  transition: border-color .3s, box-shadow .3s;
-}
-.ach-photo img {
-  display: block; width: 100%; height: 100%; object-fit: cover;
-  transition: transform .5s ease; -webkit-user-drag: none;
-}
-.ach-photo::after {                      /* gradasi dari bawah saat hover */
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to top, rgba(30, 22, 17, .6) 0%, transparent 55%);
-  opacity: 0; transition: opacity .3s ease;
-}
-.ach-photo:hover, .ach-photo:focus-visible { border-color: var(--sand); box-shadow: 0 18px 30px -22px var(--espresso); }
-.ach-photo:hover::after, .ach-photo:focus-visible::after { opacity: 1; }
-.ach-photo:hover img { transform: scale(1.05); }
-
-.ach-photo.no-img {                      /* jika gambar belum ada */
-  cursor: default;
-  background: repeating-linear-gradient(135deg, var(--surface) 0 12px, var(--alt) 12px 24px);
-}
-.ach-photo.no-img::after { display: none; }
-
-.ach-item figcaption { margin-top: .65rem; line-height: 1.35; }
-.ach-item figcaption b { display: block; font-weight: 600; font-size: .95rem; }
-.ach-item figcaption span { display: block; font-size: .82rem; color: var(--muted); }
-
-/* titik halaman */
-.ach-dots { display: flex; justify-content: center; gap: .45rem; margin-top: 1rem; }
-.ach-dot {
-  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
-  background: var(--sand);
-  transition: width .3s, background .3s;
-}
-.ach-dot.is-on { width: 26px; background: var(--accent); }
-
-/* hanya 1 halaman -> sembunyikan kontrol */
-.ach-row.is-single .ach-nav,
-.ach-row.is-single .ach-dots { display: none; }
-
-.ach-arrow:focus-visible, .ach-photo:focus-visible,
-.ach-dot:focus-visible, .ach-track:focus-visible {
-  outline: 2px solid var(--accent); outline-offset: 3px;
-}
-
-/* layar kecil: foto per slide dikurangi agar tetap jelas */
-@media (max-width: 900px) { .ach-track { --per: 3; } }
-@media (max-width: 560px) {
-  .ach-track { --per: 2; }
-  .ach-nav { display: none; }            /* di HP cukup geser dengan jari */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ach-track { scroll-behavior: auto; }
-  .ach-photo img, .ach-photo::after, .ach-dot { transition: none; }
-  .ach-photo:hover img { transform: none; }
-}
-
-/* Judul di galeri Achievements yang bisa diklik */
-.ach-item figcaption b a {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px solid var(--sand);
-  transition: color .1s, border-color .1s;
-}
-.ach-item figcaption b a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
-.ach-item figcaption b a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-/* Cursor zoom di gambar slider */
-.award-slide img{cursor:zoom-in}
-
-/* Lightbox */
-.lightbox{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  display:grid;
-  place-items:center;
-  padding:calc(56px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));
-  background:rgba(30,22,17,.92);
-  animation:lbIn .25s ease;
-}
-.lightbox[hidden]{display:none}
-@keyframes lbIn{from{opacity:0}to{opacity:1}}
-
-.lb-fig{
-  margin:0;
-  max-width:min(1100px,100%);
-  max-height:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.8rem;
-}
-.lb-img{
-  max-width:100%;
-  max-height:calc(100vh - 170px);
-  object-fit:contain;
-  border-radius:10px;
-  background:var(--beige);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-.lb-cap{color:#FAF5EB;font-size:1rem;text-align:center}
-
-.lb-btn{
-  position:absolute;
-  width:42px;height:42px;
-  border-radius:50%;
-  border:1px solid rgba(217,197,166,.5);
-  background:rgba(255,251,243,.12);
-  color:#FAF5EB;
-  font-size:1.7rem;
-  line-height:1;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  transition:background .2s;
-}
-.lb-btn:hover{background:rgba(255,251,243,.28)}
-.lb-close{top:calc(14px + env(safe-area-inset-top,0px));right:16px}
-.lb-prev,.lb-next{top:50%;transform:translateY(-50%)}
-.lb-prev{left:16px}
-.lb-next{right:16px}
-
-/* ===== Efek menonjol: slider sertifikat ===== */
-
-/* Bingkai emas + glow */
-.award{
-  border:2px solid transparent;
+  position:relative;display:flex;flex-direction:column;gap:.6rem;
+  min-width:0;padding:1rem;
+  border:2px solid transparent;border-radius:22px;
   background:
     linear-gradient(var(--surface),var(--surface)) padding-box,
-    linear-gradient(135deg,#E3C58F,#B8863B 35%,#F6E7BF 55%,#B8863B 75%,#E3C58F) border-box;
+    linear-gradient(135deg,var(--gold-soft),var(--gold) 35%,var(--gold-light) 55%,var(--gold) 75%,var(--gold-soft)) border-box;
   box-shadow:
-    0 24px 50px -24px rgba(184,134,59,.65),
-    0 0 0 6px rgba(227,197,143,.18);
+    0 24px 50px -24px color-mix(in srgb,var(--gold) 65%,transparent),
+    0 0 0 6px color-mix(in srgb,var(--gold-soft) 18%,transparent);
   animation:awardGlow 3.5s ease-in-out infinite;
   transition:box-shadow .4s;
 }
 .award:hover{
   box-shadow:
-    0 30px 60px -22px rgba(184,134,59,.85),
-    0 0 0 8px rgba(227,197,143,.28);
+    0 30px 60px -22px color-mix(in srgb,var(--gold) 85%,transparent),
+    0 0 0 8px color-mix(in srgb,var(--gold-soft) 28%,transparent);
 }
 @keyframes awardGlow{
-  0%,100%{box-shadow:0 24px 50px -24px rgba(184,134,59,.55),0 0 0 6px rgba(227,197,143,.14)}
-  50%    {box-shadow:0 28px 60px -20px rgba(184,134,59,.9),0 0 0 9px rgba(227,197,143,.3)}
+  0%,100%{box-shadow:0 24px 50px -24px color-mix(in srgb,var(--gold) 55%,transparent),0 0 0 6px color-mix(in srgb,var(--gold-soft) 14%,transparent)}
+  50%{box-shadow:0 28px 60px -20px color-mix(in srgb,var(--gold) 90%,transparent),0 0 0 9px color-mix(in srgb,var(--gold-soft) 30%,transparent)}
+}
+.award::before{                                  /* lencana bintang */
+  content:"★";position:absolute;top:-16px;right:22px;z-index:3;
+  width:38px;height:38px;display:grid;place-items:center;
+  border-radius:50%;border:2px solid var(--surface);
+  font-size:1.15rem;color:var(--espresso);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));
+  box-shadow:0 6px 14px color-mix(in srgb,var(--gold) 55%,transparent);
 }
 
-/* Lencana bintang di pojok kanan atas */
-.award::before{
-  content:"★";
-  position:absolute;
-  top:-16px;
-  right:22px;
-  z-index:3;
-  width:38px;height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  font-size:1.15rem;
-  color:#2E2018;
-  background:linear-gradient(135deg,#F6E7BF,#D4A24C);
-  border:2px solid #FFFBF3;
-  box-shadow:0 6px 14px rgba(184,134,59,.55);
+.award-viewport{
+  position:relative;flex:1;display:flex;min-height:260px;
+  overflow:hidden;border-radius:14px;touch-action:pan-y;
+  background:var(--alt);
 }
-
-/* Kilau yang menyapu gambar */
-.award-viewport::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
+.award-viewport::after{                          /* kilau menyapu */
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);
   transform:translateX(-120%);
   animation:awardShine 5s ease-in-out infinite;
@@ -1145,38 +213,428 @@ footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted);font-s
   0%,55%{transform:translateX(-120%)}
   85%,100%{transform:translateX(120%)}
 }
-
-/* Sertifikat seperti kertas yang terangkat */
-.award-viewport{background:linear-gradient(160deg,#F6EBD6,#EFE4D0)}
+.award-track{flex:1;min-width:0;display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.award-slide{flex:0 0 100%;margin:0;display:flex;flex-direction:column;gap:.7rem;min-width:0}
 .award-slide img{
-  background:#fff;
-  padding:6px;
-  border:1px solid #E2D3BA;
-  box-shadow:0 14px 30px -10px rgba(46,32,24,.45);
-  transition:transform .4s, box-shadow .4s;
+  flex:1;min-height:0;width:100%;object-fit:contain;
+  padding:6px;border:1px solid var(--line);border-radius:12px;background:var(--surface);
+  box-shadow:0 14px 30px -10px color-mix(in srgb,var(--espresso) 45%,transparent);
+  cursor:zoom-in;user-select:none;-webkit-user-drag:none;
+  transition:transform .4s,box-shadow .4s;
 }
 .award-viewport:hover .award-slide.is-active img{
   transform:scale(1.025);
-  box-shadow:0 20px 40px -10px rgba(46,32,24,.55);
+  box-shadow:0 20px 40px -10px color-mix(in srgb,var(--espresso) 55%,transparent);
 }
-
-/* Teks lebih tegas */
+.award-slide figcaption{
+  text-align:center;padding:0 .5rem .2rem;
+  opacity:.35;transform:translateY(4px);
+  transition:opacity .5s,transform .5s;
+}
+.award-slide.is-active figcaption{opacity:1;transform:none}
 .award-tag{
-  padding:.3rem .8rem;
-  border-radius:999px;
-  color:#2E2018;
-  background:linear-gradient(135deg,#F6E7BF,#E3C58F);
-  box-shadow:0 2px 6px rgba(184,134,59,.35);
+  display:inline-block;margin-bottom:.25rem;padding:.3rem .8rem;border-radius:999px;
+  font-size:var(--fs-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--espresso);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-soft));
+  box-shadow:0 2px 6px color-mix(in srgb,var(--gold) 35%,transparent);
 }
-.award-slide h3{
-  font-size:1.45rem;
-  color:var(--accent);
+.award-slide h3{font-size:1.45rem;color:var(--accent)}
+.award-slide p{margin:.15rem 0 0;font-size:var(--fs-sm);color:var(--muted)}
+
+.award-nav{
+  position:absolute;top:38%;transform:translateY(-50%);z-index:2;
+  width:34px;height:34px;display:grid;place-items:center;
+  border:1px solid var(--sand);border-radius:50%;
+  background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--accent);
+  font-size:1.4rem;line-height:1;cursor:pointer;
+  box-shadow:0 2px 8px color-mix(in srgb,var(--espresso) 15%,transparent);
+  transition:background .2s,transform .2s;
+}
+.award-nav:hover{background:var(--alt)}
+.award-nav:active{transform:translateY(-50%) scale(.94)}
+.award-nav.prev{left:8px}
+.award-nav.next{right:8px}
+
+.award-dots{display:flex;justify-content:center;gap:.5rem}
+.award-dot{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:var(--sand);cursor:pointer;transition:width .3s,background .3s}
+.award-dot.is-active{width:22px;background:linear-gradient(90deg,var(--gold),var(--accent))}
+
+/* kiri bawah: kampus */
+.campus{
+  position:relative;margin:0;height:100%;min-height:340px;
+  border-radius:22px;overflow:hidden;
+  background:linear-gradient(160deg,var(--brown),var(--espresso));
+  box-shadow:var(--shadow-deep);
+}
+.campus img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.campus:hover img{transform:scale(1.04)}
+.campus::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,color-mix(in srgb,var(--night) 25%,transparent),transparent 35%,color-mix(in srgb,var(--night) 90%,transparent))}
+.cchip{position:absolute;z-index:1;top:14px;padding:.4rem .9rem;border-radius:999px;background:color-mix(in srgb,var(--night) 80%,transparent);color:var(--cream);font-size:var(--fs-xs);font-weight:500}
+.cchip.l{left:14px}
+.cchip.r{right:14px}
+.cap{position:absolute;z-index:1;left:20px;right:20px;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;color:var(--cream)}
+.cap small{display:block;color:var(--gold-soft);font-size:var(--fs-xs);margin-bottom:.2rem}
+.cap h3{font-size:1.5rem;color:var(--cream)}
+.cap .deg{padding:.45rem .9rem;border-radius:10px;border:1px solid color-mix(in srgb,var(--sand) 50%,transparent);background:color-mix(in srgb,var(--brown) 55%,transparent);font-size:var(--fs-sm)}
+
+/* kanan bawah: 4 stat (2x2) */
+.stats{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:1rem}
+.stat{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1rem .8rem;text-align:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow-card);
+}
+.stat b{display:block;margin-bottom:.4rem;font:500 1.9rem/1.1 var(--serif);color:var(--accent)}
+.stat span{font-size:var(--fs-xs);line-height:1.4;color:var(--muted)}
+
+
+/* ---------- 6. Portfolio (slider kartu) ---------- */
+.pf-intro{color:var(--muted);margin:.4rem 0 1.5rem;max-width:56ch}
+
+.pf-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}
+.pf-filters{display:flex;flex-wrap:wrap;gap:.5rem}
+.pf-filter{
+  padding:.5rem 1rem;border:1px solid var(--line);border-radius:999px;
+  background:transparent;color:var(--text);
+  font-size:var(--fs-md);font-weight:500;cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.pf-filter:hover{border-color:var(--accent)}
+.pf-filter.is-active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+.pf-nav{display:flex;gap:.5rem}
+.pf-arrow{
+  width:42px;height:42px;border:1px solid var(--line);border-radius:50%;
+  background:var(--surface);color:var(--text);
+  font-size:1.1rem;line-height:1;cursor:pointer;
+  transition:background .2s,color .2s,opacity .2s;
+}
+.pf-arrow:hover:not(:disabled){background:var(--accent);color:var(--accent-ink)}
+.pf-arrow:disabled{opacity:.35;cursor:default}
+
+/* sembunyikan scrollbar, navigasi pakai dots */
+.pf-track{scrollbar-width:none;-ms-overflow-style:none}
+.pf-track::-webkit-scrollbar{display:none}
+
+.ach-dots[hidden]{display:none}
+
+.pf-track{
+  display:flex;gap:1.25rem;margin:0 -.25rem;padding:.25rem .25rem 1.25rem;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;
+  cursor:grab;
+}
+.pf-track.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
+.pf-track.is-dragging a{pointer-events:none}
+
+.pf-card{
+  flex:0 0 min(340px,84%);scroll-snap-align:start;
+  display:flex;flex-direction:column;overflow:hidden;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  transition:border-color .3s;
+}
+.pf-card:hover{border-color:var(--sand)}
+.pf-card[hidden]{display:none}
+
+.pf-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--alt);cursor:zoom-in}
+.pf-img.no-img{cursor:default;background:repeating-linear-gradient(135deg,var(--alt) 0 12px,var(--line) 12px 24px)}
+.pf-img img{display:block;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;transition:transform .5s ease}
+.pf-img::after{                                  /* gradasi saat hover */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,color-mix(in srgb,var(--night) 65%,transparent) 0%,color-mix(in srgb,var(--night) 25%,transparent) 35%,transparent 65%);
+  opacity:0;transition:opacity .3s ease;
+}
+.pf-img:not(.no-img):hover::after,
+.pf-img:not(.no-img):focus-visible::after{opacity:1}
+.pf-img:not(.no-img):hover img{transform:scale(1.04)}
+.pf-img:focus-visible{outline-offset:-2px}
+
+.pf-badge{
+  position:absolute;z-index:2;left:.75rem;top:.75rem;
+  padding:.25rem .65rem;border-radius:999px;
+  background:var(--surface);color:var(--text);
+  font-size:var(--fs-xs);font-weight:600;
 }
 
-/* Titik aktif ikut emas */
-.award-dot.is-active{background:linear-gradient(90deg,#B8863B,#6B4A30)}
+.pf-body{display:flex;flex-direction:column;gap:.5rem;flex:1;padding:1.1rem 1.2rem 1.3rem}
+.pf-body h3{font-size:1.15rem;line-height:1.3;color:var(--text)}
+.pf-meta{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin:0;font-size:var(--fs-sm);color:var(--muted)}
+.pf-site{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border:1px solid var(--line);border-radius:50%;color:var(--accent);
+  transition:background .2s,color .2s,border-color .2s;
+}
+.pf-site:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.pf-desc{margin:.25rem 0 0;font-size:var(--fs-md);line-height:1.6;color:var(--text)}
+.pf-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.25rem}
+.pf-tags span{padding:.2rem .55rem;border:1px solid var(--line);border-radius:6px;background:var(--alt);font-size:var(--fs-xs);color:var(--muted)}
+.pf-link{
+  align-self:flex-start;margin-top:auto;padding-top:.75rem;
+  border-bottom:2px solid transparent;
+  font-size:var(--fs-md);font-weight:600;text-decoration:none;color:var(--accent);
+}
+.pf-link:hover{border-bottom-color:currentColor}
+.pf-empty{color:var(--muted);padding:1rem 0}
 
-/* Hormati pengguna yang mematikan animasi */
+/* lightbox portfolio */
+.pf-lightbox{border:0;padding:0;background:transparent;max-width:94vw;max-height:92vh;overflow:visible}
+.pf-lightbox::backdrop{background:color-mix(in srgb,var(--night) 88%,transparent)}
+.pf-lightbox figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+.pf-lightbox img{max-width:94vw;max-height:80vh;object-fit:contain;border-radius:10px;background:var(--espresso)}
+.pf-lightbox figcaption{max-width:70ch;text-align:center;font-size:var(--fs-md);color:var(--cream)}
+.pf-lightbox-close{
+  position:absolute;top:-2.75rem;right:0;
+  width:38px;height:38px;border:0;border-radius:50%;
+  background:var(--cream);color:var(--espresso);
+  font-size:1.2rem;line-height:1;cursor:pointer;
+}
+.pf-lightbox-close:focus-visible{outline-color:var(--cream)}
+.pf-lightbox[open] img{animation:pfZoom .25s ease}
+@keyframes pfZoom{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+
+
+/* ---------- 7. Experience (timeline) & Projects ---------- */
+.tl{position:relative;display:grid;gap:2.5rem;padding-left:2rem;border-left:1px solid var(--sand)}
+.item{position:relative}
+.item::before{content:"";position:absolute;left:calc(-2rem - 5px);top:.6rem;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.when{font-size:var(--fs-sm);color:var(--muted)}
+.item h3{margin:.2rem 0}
+.org{color:var(--accent);margin-bottom:.9rem;font-weight:500}
+ul.b{margin:0;padding-left:1.1rem;color:var(--muted)}
+ul.b li{margin-bottom:.35rem;padding-left:.2rem}
+.item ul.b{max-width:46rem}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:2rem;transition:transform .35s,box-shadow .35s,border-color .35s}
+.proj:hover{transform:translateY(-6px);border-color:var(--sand);box-shadow:var(--shadow-lift)}
+.proj.wide{grid-column:1/-1}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
+.tag{padding:.25rem .8rem;border:1px solid var(--line);border-radius:999px;background:var(--alt);font-size:var(--fs-xs);color:var(--muted)}
+
+
+/* ---------- 8. Skills ---------- */
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.skills h3{margin-bottom:1.2rem}
+
+/* Skills & Expertise */
+#skills{padding:4rem 0}
+.sk-eyebrow,
+.sk-strengths h4{
+  margin:0 0 .6rem;
+  font:600 var(--fs-xs)/1.4 var(--sans);
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent-soft);
+}
+.sk-title{margin:0 0 .5rem}                      /* ukuran & font mengikuti h2 */
+.sk-sub{margin:0 0 1.4rem;font-size:var(--fs-lg);color:var(--muted)}
+
+.sk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;align-items:stretch}
+.sk-card{
+  display:flex;flex-direction:column;
+  padding:1.1rem 1.1rem 1.3rem;
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.sk-card:hover{transform:translateY(-3px);border-color:var(--sand);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--espresso) 45%,transparent)}
+.sk-icon{width:28px;height:28px;margin-bottom:1rem;fill:none;stroke:var(--accent-soft);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sk-card h3{margin:0 0 .9rem}
+.sk-card p{margin:0;font-size:var(--fs-md);line-height:1.6;color:var(--muted)}
+
+.sk-strengths{margin-top:.9rem;padding:1rem 1rem 1.1rem;border-radius:20px;background:var(--alt)}
+.sk-strengths ul{display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;list-style:none}
+.sk-strengths li{padding:.4rem .9rem;border-radius:999px;background:var(--surface);color:var(--text);font-size:var(--fs-md);transition:background .2s,transform .2s}
+.sk-strengths li:hover{background:#fff;transform:translateY(-2px)}
+
+/* varian daftar skill (dipakai jika HTML masih memakai .sk-head / .sk-list) */
+.sk-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.sk-head h3{margin:0}
+.sk-badge{flex:none;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink)}
+.sk-badge svg{width:26px;height:26px}
+.sk-list{list-style:none;margin:0;padding:0}
+.sk-list li{display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-top:1px solid var(--line)}
+.sk-ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--alt);color:var(--accent);transition:background .25s,color .25s}
+.sk-ico svg{width:20px;height:20px}
+.sk-list li:hover .sk-ico{background:var(--accent);color:var(--accent-ink)}
+.sk-name{display:block;font-weight:600;line-height:1.3}
+.sk-note{margin:.2rem 0 0;font-size:var(--fs-md);line-height:1.55;color:var(--muted)}
+.sk-card .tags{margin-top:.55rem;gap:.4rem}
+
+
+/* ---------- 9. Education ---------- */
+.edu{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.gpa{font:400 3rem/1 var(--serif);color:var(--accent);margin:1rem 0 .3rem}
+
+
+/* ---------- 10. Achievements ---------- */
+.ach-row+.ach-row{margin-top:3.25rem}
+.ach-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}
+.ach-title{display:flex;align-items:center;gap:.9rem}
+.ach-title h3{margin:0}
+.ach-sub{margin:0;font-size:var(--fs-sm);color:var(--muted)}
+.ach-icon{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink)}
+.ach-icon svg{width:24px;height:24px}
+
+.ach-nav{display:flex;gap:.5rem}
+.ach-arrow{
+  width:42px;height:42px;border:1px solid var(--line);border-radius:50%;
+  background:var(--surface);color:var(--text);
+  font-size:1.1rem;line-height:1;cursor:pointer;
+  transition:background .2s,color .2s,opacity .2s;
+}
+.ach-arrow:hover:not(:disabled){background:var(--accent);color:var(--accent-ink)}
+.ach-arrow:disabled{opacity:.35;cursor:default}
+
+.ach-track{
+  --per:4;--gap:1rem;
+  display:flex;gap:var(--gap);padding:.25rem 0 .5rem;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.ach-track::-webkit-scrollbar{display:none}
+.ach-item{flex:0 0 calc((100% - var(--gap) * (var(--per) - 1)) / var(--per));scroll-snap-align:start;margin:0}
+
+.ach-photo{
+  position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;overflow:hidden;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;cursor:zoom-in;
+  transition:border-color .3s,box-shadow .3s;
+}
+.ach-photo img{display:block;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;transition:transform .5s ease}
+.ach-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,color-mix(in srgb,var(--night) 60%,transparent) 0%,transparent 55%);opacity:0;transition:opacity .3s ease}
+.ach-photo:hover,.ach-photo:focus-visible{border-color:var(--sand);box-shadow:0 18px 30px -22px var(--espresso)}
+.ach-photo:hover::after,.ach-photo:focus-visible::after{opacity:1}
+.ach-photo:hover img{transform:scale(1.05)}
+.ach-photo.no-img{cursor:default;background:repeating-linear-gradient(135deg,var(--surface) 0 12px,var(--alt) 12px 24px)}
+.ach-photo.no-img::after{display:none}
+
+.ach-item figcaption{margin-top:.65rem;line-height:1.35}
+.ach-item figcaption b{display:block;font-size:var(--fs-md);font-weight:600}
+.ach-item figcaption span{display:block;font-size:var(--fs-xs);color:var(--muted)}
+.ach-item figcaption b a{color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);transition:color .1s,border-color .1s}
+.ach-item figcaption b a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+.ach-dots{display:flex;justify-content:center;gap:.45rem;margin-top:1rem}
+.ach-dot{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:var(--sand);cursor:pointer;transition:width .3s,background .3s}
+.ach-dot.is-on{width:26px;background:var(--accent)}
+.ach-row.is-single .ach-nav,
+.ach-row.is-single .ach-dots{display:none}
+
+
+/* ---------- 11. Contact & footer ---------- */
+.contact{text-align:center}
+.contact h2{margin-bottom:1rem}
+.contact p{color:var(--muted);max-width:32rem;margin:0 auto 2.2rem}
+.contact .btns{justify-content:center}
+
+.contact-card{
+  margin:0 auto;
+  padding:clamp(2.5rem,6vw,4.25rem) clamp(1.25rem,4vw,2.5rem);
+  border:1px solid color-mix(in srgb,var(--sand) 35%,transparent);border-radius:22px;
+  text-align:center;color:var(--cream);
+  background:linear-gradient(160deg,var(--brown) 0%,var(--espresso) 100%);
+  box-shadow:var(--shadow-deep);
+}
+.contact-card h2{margin:0 0 1rem;color:var(--cream)}
+.contact-card h2 em{font-style:italic;color:var(--gold-soft)}
+.contact-card p{
+  max-width:52ch;margin:0 auto 2.25rem;
+  font-family:var(--sans);font-size:clamp(1rem,2vw,1.1rem);line-height:1.7;
+  color:color-mix(in srgb,var(--cream) 80%,transparent);
+}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.9rem 1rem}
+.contact-links a{
+  padding:.85rem 1.6rem;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--sand) 45%,transparent);
+  background:color-mix(in srgb,var(--cream) 8%,transparent);color:var(--cream);
+  font-family:var(--sans);font-size:var(--fs-md);font-weight:500;text-decoration:none;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  transition:background .2s,color .2s,transform .2s,border-color .2s,box-shadow .2s;
+}
+.contact-links a:hover{background:var(--cream);color:var(--espresso);border-color:var(--cream);transform:translateY(-2px);box-shadow:0 8px 20px -10px #000}
+.contact-links a:focus-visible{outline-color:var(--cream)}
+
+footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted);font-size:var(--fs-sm);text-align:center}
+
+
+/* ---------- 12. Lightbox sertifikat ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;display:grid;place-items:center;
+  padding:calc(56px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb,var(--night) 92%,transparent);
+  animation:lbIn .25s ease;
+}
+.lightbox[hidden]{display:none}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lb-fig{margin:0;max-width:min(1100px,100%);max-height:100%;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.lb-img{max-width:100%;max-height:calc(100vh - 170px);object-fit:contain;border-radius:10px;background:var(--alt);box-shadow:0 20px 60px color-mix(in srgb,var(--night) 50%,transparent)}
+.lb-cap{color:var(--cream);font-size:1rem;text-align:center}
+.lb-btn{
+  position:absolute;width:42px;height:42px;display:grid;place-items:center;
+  border:1px solid color-mix(in srgb,var(--sand) 50%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--cream) 12%,transparent);color:var(--cream);
+  font-size:1.7rem;line-height:1;cursor:pointer;transition:background .2s;
+}
+.lb-btn:hover{background:color-mix(in srgb,var(--cream) 28%,transparent)}
+.lb-close{top:calc(14px + env(safe-area-inset-top,0px));right:16px}
+.lb-prev,.lb-next{top:50%;transform:translateY(-50%)}
+.lb-prev{left:16px}
+.lb-next{right:16px}
+
+
+/* ---------- 13. Animasi muncul ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease;transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.load{animation:fade 1s ease both;animation-delay:var(--d,0s)}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+
+/* ---------- 14. Responsive ---------- */
+@media (max-width:860px){
+  section{padding:4.5rem 0}
+  .hero .wrap,.about,.grid2,.skills,.edu{grid-template-columns:1fr}
+  .hero .wrap{gap:2.5rem}
+
+  .menu{display:block}
+  .links{
+    position:absolute;top:calc(68px + env(safe-area-inset-top,0px));left:0;right:0;
+    flex-direction:column;gap:0;max-height:0;overflow:hidden;
+    background:var(--bg);border-bottom:1px solid var(--line);transition:max-height .35s;
+  }
+  .links.open{max-height:340px}
+  .links a{display:block;padding:.9rem 1.25rem}
+  .links a::after{display:none}
+
+  .about-grid{
+    grid-template-columns:1fr;
+    grid-template-areas:"desc" "award" "campus" "stats";
+  }
+  .campus{min-height:300px}
+}
+@media (max-width:900px){.ach-track{--per:3}}
+@media (max-width:760px){.campus{min-height:260px}}
+@media (max-width:700px){
+  .sk-grid{grid-template-columns:1fr}
+  .sk-card h3{font-size:1.2rem}
+}
+@media (max-width:600px){.pf-nav{display:none}}   /* di HP cukup geser dengan jari */
+@media (max-width:560px){
+  .ach-track{--per:2}
+  .ach-nav{display:none}
+}
+@media (max-width:480px){.contact-links a{flex:1 1 40%}}
+
+
+/* ---------- 15. Hormati "kurangi gerakan" ---------- */
 @media (prefers-reduced-motion:reduce){
+  html,.pf-track,.ach-track{scroll-behavior:auto}
+  .rv,.load{opacity:1;transform:none;animation:none;transition:none}
   .award,.award-viewport::after{animation:none}
+  .sk-card,.sk-ico,.contact-links a,
+  .pf-img img,.pf-img::after,
+  .ach-photo img,.ach-photo::after,.ach-dot{transition:none}
+  .sk-card:hover,.contact-links a:hover,
+  .pf-img:hover img,.ach-photo:hover img{transform:none}
+  .pf-lightbox[open] img{animation:none}
 }
